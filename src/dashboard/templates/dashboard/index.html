@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load django_bootstrap5 %}
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Flight Dashboard</title>
+    <title>{{ title }}</title>
+    {% bootstrap_css %}
 </head>
 <body>
-Welcome to the Flight Dashboard!
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Flight Dashboard</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admin">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% if alerts %}
+    {% for alert in alerts %}
+        <div class="alert alert-primary" role="alert">
+          {{ alert }}
+        </div>
+    {% endfor %}
+    {% endif %}
+    {% bootstrap_javascript %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-2">
+                <h3>Data buttons</h3>
+            </div>
+            <div class="col-md-8">
+                <h3>Data display</h3>
+            </div>
+            <div class="col-md-2">
+                <h3>Recent flights</h3>
+                {% for flight in flights %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ flight }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">XYZ airline</h6>
+                        <p class="card-text">Flying from A to B</p>
+                        <a href="" class="card-link disabled">Link to flight info</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
